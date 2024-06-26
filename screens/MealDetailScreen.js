@@ -1,33 +1,40 @@
 import React, { useLayoutEffect } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  ScrollView,
-  Pressable,
-} from "react-native";
+import { View, Text, StyleSheet, Image, ScrollView, Pressable } from "react-native";
 import MealDetail from "../components/MealDetail";
 import { MEALS } from "../data/dummy-data";
 import { Ionicons } from "@expo/vector-icons";
+import { useDispatch, useSelector } from "react-redux";
+import { addFavorite, removeFavorite } from "../store/redux/Favorite";
 
 const MealDetailScreen = ({ route, navigation }) => {
+  const favoriteMealsIds = useSelector(state => state.favoriteMeals.ids);
+  const dispatch = useDispatch();
+
   const { mealId } = route.params;
-  const selectedMeal = MEALS.find((meal) => meal.id === mealId);
-  const headerButtonPressHandler =()=>{
-    console.warn(mealId);
-  }
+  const selectedMeal = MEALS.find(meal => meal.id === mealId);
+  const mealIsFavorite = favoriteMealsIds.includes(mealId);
+
+  const changeFavoriteStatusHandler = () => {
+    if (mealIsFavorite) {
+      dispatch(removeFavorite({ id: mealId }));
+    } else {
+      dispatch(addFavorite({ id: mealId }));
+    }
+  };
+
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerRight: () => {
-        return (
-          <Pressable onPress={headerButtonPressHandler}>
-            <Ionicons name="star" size={24} color={"yellow"} />
-          </Pressable>
-        );
-      },
+      headerRight: () => (
+        <Pressable onPress={changeFavoriteStatusHandler}>
+          <Ionicons
+            name={mealIsFavorite ? "star" : "star-outline"}
+            size={24}
+            color={"yellow"}
+          />
+        </Pressable>
+      ),
     });
-  }, [navigation]);
+  }, [navigation, mealIsFavorite]);
 
   return (
     <ScrollView style={styles.screen}>
@@ -74,7 +81,7 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 24,
-    textTransform: 'uppercase',
+    textTransform: "uppercase",
     color: "white",
     fontWeight: "bold",
     borderBottomWidth: 2,
@@ -97,10 +104,10 @@ const styles = StyleSheet.create({
     color: "white",
     marginVertical: 5,
     marginHorizontal: 20,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     padding: 6,
     borderRadius: 8,
-    backgroundColor: '#F27900'
+    backgroundColor: "#F27900",
   },
 });
 
