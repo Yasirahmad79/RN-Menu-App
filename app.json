@@ -23,6 +23,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "1f0596df-75ab-41a7-98f2-db92cf173eac"
+      }
+    },
+    "owner": "yasir79"
   }
 }
