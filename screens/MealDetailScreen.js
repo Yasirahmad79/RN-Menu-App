@@ -5,6 +5,7 @@ import { MEALS } from "../data/dummy-data";
 import { Ionicons } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { addFavorite, removeFavorite } from "../store/redux/Favorite";
+import { Colors } from "../constants/styles";
 
 const MealDetailScreen = ({ route, navigation }) => {
   const favoriteMealsIds = useSelector(state => state.favoriteMeals.ids);
@@ -84,9 +85,9 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
     color: "white",
     fontWeight: "bold",
-    borderBottomWidth: 2,
+    borderBottomWidth: 1,
     marginHorizontal: 24,
-    borderColor: "#F27900",
+    borderColor: "#000000",
     paddingBottom: 6,
     marginVertical: 10,
     textAlign: "center",
@@ -94,8 +95,6 @@ const styles = StyleSheet.create({
   moreDetail: {
     marginHorizontal: 26,
     marginBottom: 16,
-    borderWidth: 2,
-    borderColor: "#F27900",
     paddingBottom: 16,
     borderRadius: 10,
   },
@@ -107,7 +106,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     padding: 6,
     borderRadius: 8,
-    backgroundColor: "#F27900",
+    backgroundColor: Colors.lightGrey,
   },
 });
 

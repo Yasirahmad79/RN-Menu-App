@@ -1,51 +1,55 @@
+
+import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
 const CategoryGridTile = ({ title, color, onPress }) => {
   return (
-    <View style={styles.gridItems}>
+    <View style={styles.root}>
       <Pressable
         android_ripple={{ color: "#ccc" }}
         style={({ pressed }) => [
-          styles.button,
-          pressed ? styles.buttonPressed : null,
+          styles.gridItem,
+          { backgroundColor: pressed ? "#ddd" : color }, 
         ]}
         onPress={onPress}
       >
-        <View style={[styles.innerContainer, { backgroundColor: color }]}>
+        <View style={styles.innerContainer}>
           <Text style={styles.gridTitleText}>{title}</Text>
         </View>
       </Pressable>
     </View>
   );
 };
+
 export default CategoryGridTile;
 
 const styles = StyleSheet.create({
-  gridItems: {
-    flex: 1,
-    height: 120,
-    margin: 16,
-    borderRadius: 8,
-    elevation: 4,
-    shadowColor: "black",
+  root: {
+    height: 50,
+    borderRadius: 12,
+    overflow: "hidden", 
+    marginRight: 10,
+    elevation: 6,
+    shadowColor: "#000",
     shadowOpacity: 0.25,
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 8,
+    shadowRadius: 4,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
   },
-  button: { flex: 1 },
-  innerContainer: {
-    flex: 1,
-    alignItems: "center",
+  gridItem: {
+    borderRadius: 12,
     justifyContent: "center",
-    borderRadius: 8,
-    elevation: 4,
-    padding: 16,
+    alignItems: "center",
+  },
+  innerContainer: {
+    padding: 10
   },
   gridTitleText: {
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: "bold",
+    color: 'white',
+    textAlign: "center",
   },
-  buttonPressed: {
-    opacity: 0.25
-  }
 });

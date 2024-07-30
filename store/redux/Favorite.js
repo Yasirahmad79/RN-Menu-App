@@ -1,9 +1,9 @@
-// In store/redux/Favorite.js
+
 
 import { createSlice } from "@reduxjs/toolkit";
 
 const favoritesSlice = createSlice({
-  name: 'favoriteMeals', // Use 'favoriteMeals' here to match your store setup
+  name: 'favoriteMeals',
   initialState: {
     ids: []
   },
